@@ -4,6 +4,11 @@
 
   <li>
     <strong>Name:</strong>
+    <%= first_name(@user.name) %>
+  </li>
+
+  <li>
+    <strong>Full Name:</strong>
     <%= @user.name %>
   </li>
 
