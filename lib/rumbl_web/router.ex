@@ -15,7 +15,6 @@ defmodule RumblWeb.Router do
 
   scope "/accounts", RumblWeb.Accounts, as: :accounts do
     pipe_through(:browser)
-    ...
     resources("/users", UserController)
   end
 

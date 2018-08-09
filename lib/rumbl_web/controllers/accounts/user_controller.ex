@@ -20,6 +20,7 @@ defmodule RumblWeb.Accounts.UserController do
         conn
         |> put_flash(:info, "User created successfully.")
         |> redirect(to: accounts_user_path(conn, :show, user))
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -44,6 +45,7 @@ defmodule RumblWeb.Accounts.UserController do
         conn
         |> put_flash(:info, "User updated successfully.")
         |> redirect(to: accounts_user_path(conn, :show, user))
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", user: user, changeset: changeset)
     end
