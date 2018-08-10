@@ -4,7 +4,7 @@
 
   <li>
     <strong>Name:</strong>
-    <%= first_name(@user.name) %>
+    <%= first_name(@user) %>
   </li>
 
   <li>
