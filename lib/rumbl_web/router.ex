@@ -20,6 +20,12 @@ defmodule RumblWeb.Router do
     resources("/sessions", SessionController, only: [:new, :create, :delete])
   end
 
+  scope "/manage", RumblWeb.Library, as: :library do
+    pipe_through([:browser, :authenticate_user])
+
+    resources("/videos", VideoController)
+  end
+
   scope "/", RumblWeb do
     # Use the default browser stack
     pipe_through(:browser)
