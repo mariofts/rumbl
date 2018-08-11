@@ -7,6 +7,7 @@ defmodule RumblWeb.Router do
     plug(:fetch_flash)
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
+    plug(RumblWeb.Auth, repo: Rumbl.Repo)
   end
 
   pipeline :api do
@@ -16,6 +17,7 @@ defmodule RumblWeb.Router do
   scope "/accounts", RumblWeb.Accounts, as: :accounts do
     pipe_through(:browser)
     resources("/users", UserController)
+    resources("/sessions", SessionController, only: [:new, :create, :delete])
   end
 
   scope "/", RumblWeb do

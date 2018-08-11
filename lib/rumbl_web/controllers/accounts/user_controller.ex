@@ -1,5 +1,6 @@
 defmodule RumblWeb.Accounts.UserController do
   use RumblWeb, :controller
+  plug(:authenticate when action in [:index, :show])
 
   alias Rumbl.Accounts
   alias Rumbl.Accounts.User
@@ -18,6 +19,7 @@ defmodule RumblWeb.Accounts.UserController do
     case Accounts.create_user(user_params) do
       {:ok, user} ->
         conn
+        |> RumblWeb.Auth.login(user)
         |> put_flash(:info, "#{user.name} created!")
         |> redirect(to: accounts_user_path(conn, :show, user))
 
@@ -58,5 +60,16 @@ defmodule RumblWeb.Accounts.UserController do
     conn
     |> put_flash(:info, "User deleted successfully.")
     |> redirect(to: accounts_user_path(conn, :index))
+  end
+
+  defp authenticate(conn, _opts) do
+    if conn.assigns.current_user do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You must be logged in to access that page")
+      |> redirect(to: page_path(conn, :index))
+      |> halt()
+    end
   end
 end
