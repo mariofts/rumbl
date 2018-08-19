@@ -53,6 +53,10 @@ defmodule Rumbl.Library do
     |> Repo.get!(id)
   end
 
+  def get_video!(id) do
+    Repo.get!(Video, id)
+  end
+
   @doc """
   Creates a video.
 

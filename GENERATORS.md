@@ -10,5 +10,6 @@
 
 ## Adding video categories
 `mix phx.gen.schema Library.Category categories name:string`
-`mix ecto.gen.migration add_category_id_to_video`
+
+
 

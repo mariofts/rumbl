@@ -20,10 +20,11 @@ defmodule RumblWeb.Router do
     resources("/sessions", SessionController, only: [:new, :create, :delete])
   end
 
-  scope "/manage", RumblWeb.Library, as: :library do
+  scope "/", RumblWeb.Library, as: :library do
     pipe_through([:browser, :authenticate_user])
 
-    resources("/videos", VideoController)
+    resources("/manage/videos", VideoController)
+    get("/watch/:id", WatchController, :show)
   end
 
   scope "/", RumblWeb do
