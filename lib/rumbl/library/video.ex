@@ -7,7 +7,7 @@ defmodule Rumbl.Library.Video do
     field(:title, :string)
     field(:url, :string)
     belongs_to(:user, Rumbl.Accounts.User)
-
+    belongs_to(:category, Rumbl.Library.Category)
     timestamps()
   end
 
