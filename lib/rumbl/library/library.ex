@@ -105,7 +105,7 @@ defmodule Rumbl.Library do
   def delete_video(%Video{:id => id}, %User{} = user) do
     id
     |> get_video!(user)
-    |> Repo.delete!()
+    |> Repo.delete()
   end
 
   @doc """
