@@ -3,6 +3,9 @@ defmodule RumblWeb.Library.VideoController do
 
   alias Rumbl.Library
   alias Rumbl.Library.Video
+  alias Rumbl.Library.Category
+
+  plug(:load_categories when action in [:new, :create, :edit, :update])
 
   def index(conn, _params, user) do
     videos = Library.list_videos(user)
@@ -58,6 +61,11 @@ defmodule RumblWeb.Library.VideoController do
     conn
     |> put_flash(:info, "Video deleted successfully.")
     |> redirect(to: library_video_path(conn, :index))
+  end
+
+  defp load_categories(conn, _) do
+    categories = Library.list_categories()
+    assign(conn, :categories, categories)
   end
 
   @doc """

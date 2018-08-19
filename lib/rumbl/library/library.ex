@@ -8,7 +8,15 @@ defmodule Rumbl.Library do
   alias Rumbl.Repo
 
   alias Rumbl.Library.Video
+  alias Rumbl.Library.Category
   alias Rumbl.Accounts.User
+
+  def list_categories do
+    Category
+    |> Category.alphabetical()
+    |> Category.names_and_id()
+    |> Repo.all()
+  end
 
   @doc """
   Returns the list of videos.
