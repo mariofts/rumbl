@@ -2,12 +2,13 @@ defmodule Rumbl.Library do
   @moduledoc """
   The Library context.
   """
-  import Ecto, only: [assoc: 2]
+  import Ecto, only: [assoc: 2, build_assoc: 3]
   import Ecto.Changeset
   import Ecto.Query, warn: false
   alias Rumbl.Repo
 
   alias Rumbl.Library.Video
+  alias Rumbl.Library.Annotation
   alias Rumbl.Library.Category
   alias Rumbl.Accounts.User
 
@@ -123,6 +124,25 @@ defmodule Rumbl.Library do
   """
   def change_video(%Video{} = video) do
     Video.changeset(video, %{})
+  end
+
+  def create_annotation(attrs \\ %{}, video_id, user) do
+    user
+    |> build_assoc(:annotations, video_id: video_id)
+    |> Annotation.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def list_annotations_from_video(video, last_seen_id) do
+    Repo.all(
+      from(
+        a in assoc(video, :annotations),
+        where: a.id > ^last_seen_id,
+        order_by: [asc: a.at, asc: a.id],
+        limit: 200,
+        preload: [:user]
+      )
+    )
   end
 
   defp user_videos(%User{} = user) do

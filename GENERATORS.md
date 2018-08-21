@@ -11,5 +11,6 @@
 ## Adding video categories
 `mix phx.gen.schema Library.Category categories name:string`
 
-
+## Annotations 
+`mix phx.gen.schema Library.Annotation annotations body:text at:integer user_id:references:users video_id:references:videos`
 
