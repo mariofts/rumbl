@@ -8,6 +8,10 @@ defmodule Rumbl.Accounts do
 
   alias Rumbl.Accounts.User
 
+  def get_user_by(params) do
+    Repo.get_by!(User, params)
+  end
+
   @doc """
   Returns the list of users.
 

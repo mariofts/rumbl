@@ -62,3 +62,12 @@ config :rumbl, Rumbl.Repo,
   database: "rumbl_dev_new",
   hostname: "localhost",
   pool_size: 10
+
+# Import a file with the wolfram app key.
+# You can get one at https://developer.wolframalpha.com/portal/signup.html
+# This file should have a content similar to:
+# 
+# use Mix.Config
+# config :rumbl, :wolfram, app_id: "XXXXX-XXXXXXXX"
+
+import_config "dev.secret.exs"

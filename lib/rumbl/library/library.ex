@@ -145,6 +145,10 @@ defmodule Rumbl.Library do
     )
   end
 
+  def load_user_from_annotation(annotation) do
+    Repo.preload(annotation, :user)
+  end
+
   defp user_videos(%User{} = user) do
     assoc(user, :videos)
   end
