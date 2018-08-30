@@ -47,7 +47,7 @@ defmodule RumblWeb.Library.VideoChannel do
   end
 
   defp compute_additional_info(annotation, socket) do
-    for result <- Rumbl.InfoSys.compute(annotation.body, limit: 1, timeout: 10_000) do
+    for result <- InfoSys.compute(annotation.body, limit: 1, timeout: 10_000) do
       attrs = %{url: result.url, body: result.text, at: annotation.at}
       user = Accounts.get_user_by(%{username: result.backend})
 
